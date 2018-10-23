@@ -1,0 +1,8 @@
+RabbitMQ的工作流程介绍
+1、建立信息。Publisher定义需要发送消息的结构和内容。
+2、建立Conection和Channel。由Publisher和Consumer创建连接，连接到Broker的物理节点上，同时建立Channel。Channel是建立在Connection之上的，一个Connection可以建立多个Channel。Publisher连接Virtual Host 建立Channel，Consumer连接到相应的Queue上建立Channel。
+3、声明交换机和队列。声明一个消息交换机（Exchange）和队列（Queue），并设置相关属性。
+4、发送消息。由Publisher发送消息到Broker中的Exchange中
+5、路由转发。RabbitMQ收到消息后，根据​​消息指定的Exchange(交换机) 来查找Binding(绑定) 然后根据规则（Routing Key）分发到不同的Queue。这里就是说使用Routing Key在消息交换机（Exchange）和消息队列（Queue）中建立好绑定关系，然后将消息发送到绑定的队列中去。
+6、消息接收。Consumer监听相应的Queue，一旦Queue中有可以消费的消息，Queue就将消息发送给Consumer端。
+7、消息确认。当Consumer完成某一条消息的处理之后，需要发送一条ACK消息给对应的Queue。
